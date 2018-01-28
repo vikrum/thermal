@@ -1,3 +1,10 @@
+var converter = require('number-to-words');
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+
 var thermalMaxWidth = 28;
 
 function centerStr(str) {
@@ -22,6 +29,23 @@ function todayIs() {
   console.log(centerStr(dstr));
 }
 
+function numbersPlaces() {
+  console.log('╔══════════════════════════╗');
+  console.log('║           Numbers        ║');
+  console.log('╚══════════════════════════╝');
+  console.log();
+
+  var onesPlace = 6;
+  for(i = 0; i < 4; i++) {
+    var exponent = getRandomInt(8);
+    var number = onesPlace * Math.pow(10, exponent);
+//    console.log(centerStr(number.toLocaleString()));
+    console.log(centerStr('_'.repeat(number.toLocaleString().length + 4)));
+    console.log(centerStr(converter.toWords(number))); 
+    console.log();
+  }
+}
+
 function ruleOfLife() {
   console.log('╔══════════════════════════╗');
   console.log('║       Rule Of Life       ║');
@@ -42,9 +66,10 @@ function ruleOfLife() {
 ['Always sit straight. (Mama)'],
 ['Always think for yourself','and use your own','thinking. (Papa)'],
 ['Always keep improving (Papa)'],
-['Never show weakness (Andrew)'],
 ['Always pay attention to','what you are doing (Papa)'],
 ['Always practice (Papa)'],
+['Always use the right tool', 'for the job (Papa)'],
+['Improvise sometimes (Papa)'],
 ['Always keep trying hard','things until they get','easy (Papa)'],
 ];
 
@@ -57,3 +82,4 @@ function ruleOfLife() {
 header();
 todayIs();
 ruleOfLife();
+numbersPlaces();
