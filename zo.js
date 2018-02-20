@@ -36,8 +36,8 @@ function numbersPlaces() {
   console.log('╚══════════════════════════╝');
   console.log();
 
-  var onesPlace = 6;
-  for(i = 0; i < 4; i++) {
+  for(i = 0; i < 5; i++) {
+    var onesPlace = getRandomInt(9);
     var exponent = getRandomInt(8);
     var number = onesPlace * Math.pow(10, exponent);
 //    console.log(centerStr(number.toLocaleString()));

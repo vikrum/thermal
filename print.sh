@@ -3,9 +3,10 @@
 TMP=$(mktemp)
 
 # node math.js > $TMP
-node daily.js > $TMP
-
-# cat $TMP maze.txt | lpr -P EPSON_TM_T20II
+node zo.js > $TMP
 cat $TMP | lpr -P EPSON_TM_T20II
+rm $TMP
 
+node tara.js > $TMP
+cat $TMP | lpr -P EPSON_TM_T20II
 rm $TMP
