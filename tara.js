@@ -23,6 +23,16 @@ function header() {
   console.log('╚══════════════════════════╝');
 }
 
+function footer() {
+  console.log();
+  console.log('════════════════════════════');
+  console.log(centerStr('♦︎ ★ ☾ ☺︎ ■ ● ❤︎ ❀ ❄︎ ☃'));
+  console.log(' ');
+  console.log(' ');
+  console.log('.');
+}
+
+
 function todayIs() {
   console.log(centerStr('Today Is'));
   var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -46,7 +56,6 @@ function numberDots() {
   console.log(centerStr('8   * * * * * * * *'));
   console.log(centerStr('9   * * * * * * * * *'));
   console.log(centerStr('10  * * * * * * * * * *'));
-  console.log();
 }
 
 function numbersPlaces() {
@@ -122,3 +131,4 @@ ruleOfLife();
 numberDots();
 //numbersPlaces();
 //wordSearch();
+footer();
