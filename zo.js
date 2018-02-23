@@ -5,7 +5,6 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-
 var thermalMaxWidth = 28;
 
 function centerStr(str) {
@@ -23,9 +22,27 @@ function header() {
   console.log('╚══════════════════════════╝');
 }
 
+var upperLimit = 20;
+function mathPractice() { // max width: 28
+  console.log('╔══════════════════════════╗');
+  console.log('║  Zoravar\'s Math Practice ║');
+  console.log('╚══════════════════════════╝');
+  console.log('\n');
+  arithmetic('+');
+}
+
+function arithmetic(sign) {
+  for(i = 0; i < 10; i ++) { 
+    var x = getRandomInt(upperLimit) + '';
+    var y = getRandomInt(upperLimit) + '';
+    console.log('     ' + x.padStart(2) + ' ' +  sign + ' ' + y.padStart(2) + ' = ______');
+    console.log('\n');
+  }
+} 
+
 function todayIs() {
-  console.log(centerStr('Today Is'));
-  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  console.log(centerStr('Today Is ' + new Date().toLocaleDateString('en-US', { weekday: 'long'})));
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
   var dstr = new Date().toLocaleDateString('en-US', options)
   console.log(centerStr(dstr));
 }
@@ -62,6 +79,7 @@ function wordSearch() {
   for(i = 0; i < words.length; i++) {
     console.log(centerStr(words[i]));
   }
+  console.log()
 }
 
 function ruleOfLife() {
@@ -102,3 +120,5 @@ todayIs();
 ruleOfLife();
 numbersPlaces();
 wordSearch();
+mathPractice();
+
