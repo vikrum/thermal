@@ -1,5 +1,6 @@
 var converter = require('number-to-words');
 var wordsearch = require('wordsearch');
+var fs = require('fs');
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -69,7 +70,7 @@ function wordSearch() {
   console.log('║       Word Search        ║');
   console.log('╚══════════════════════════╝');
 
-  var words = ['firebase', 'google', 'california', 'india', 'zoravar'];
+  var words = ['firebase', 'tara', 'california', 'india', 'zoravar'];
   var search = wordsearch(words, thermalMaxWidth / 2, thermalMaxWidth / 2);
   search.grid.forEach(function(row) { console.log(row.join(' ')); } );
 
@@ -115,10 +116,16 @@ function ruleOfLife() {
   }
 }
 
+function maze() {
+  var contents = fs.readFileSync('./maze.txt', 'utf8');
+  console.log(contents);
+}
+
 header();
 todayIs();
 ruleOfLife();
 numbersPlaces();
-wordSearch();
 mathPractice();
+maze();
+wordSearch();
 
