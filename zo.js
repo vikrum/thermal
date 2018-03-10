@@ -36,7 +36,7 @@ function mathPractice() { // max width: 28
 function multTable() {
   for(var i = 0; i < 14; i++) {
     str = "3 x " + i + " = ___" + "    " + "6 x " + i + " = ___"; 
-    console.log(str);
+    console.log(str + '\n');
   }
 }
 
