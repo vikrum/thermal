@@ -28,8 +28,16 @@ function mathPractice() { // max width: 28
   console.log('╔══════════════════════════╗');
   console.log('║  Zoravar\'s Math Practice ║');
   console.log('╚══════════════════════════╝');
-  console.log('\n');
-  arithmetic('+');
+//  console.log('\n');
+//  arithmetic('+');
+  multTable();
+}
+
+function multTable() {
+  for(var i = 0; i < 14; i++) {
+    str = "3 x " + i + " = ___" + "    " + "6 x " + i + " = ___"; 
+    console.log(str);
+  }
 }
 
 function arithmetic(sign) {
