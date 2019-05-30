@@ -1,6 +1,22 @@
 var converter = require('number-to-words');
 var wordsearch = require('wordsearch');
 var fs = require('fs');
+const request = require('request');
+const wordwrap = require('word-wrap');
+
+function downloadPage(url) {
+    return new Promise((resolve, reject) => {
+        request(url, {headers: {'User-Agent': 'daily thermal printout vsnijjar@gmail.com'}}, (error, response, body) => {
+            if (error) reject(error);
+            if (response.statusCode != 200) {
+                reject('Invalid status code <' + response.statusCode + '>');
+		console.log(response);
+            }
+            resolve(body);
+        });
+    });
+}
+
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -35,7 +51,7 @@ function mathPractice() { // max width: 28
 
 function multTable() {
   for(var i = 0; i < 14; i++) {
-    str = "3 x " + i + " = ___" + "    " + "6 x " + i + " = ___"; 
+    str = "7 x " + i + " = ___" + "    " + "8 x " + i + " = ___"; 
     console.log(str + '\n');
   }
 }
@@ -78,7 +94,7 @@ function wordSearch() {
   console.log('║       Word Search        ║');
   console.log('╚══════════════════════════╝');
 
-  var words = ['firebase', 'tara', 'california', 'india', 'zoravar'];
+  var words = ['tara', 'california', 'india', 'zoravar'];
   var search = wordsearch(words, thermalMaxWidth / 2, thermalMaxWidth / 2);
   search.grid.forEach(function(row) { console.log(row.join(' ')); } );
 
@@ -100,6 +116,7 @@ function ruleOfLife() {
 ['Always ask why (Papa)'],
 ['Always be happy (Papa & Zo)'],
 ['Always eat slow and never','rush anything (Zo)'],
+['Always say PLEASE and','THANK YOU to others.'],
 ['Always have fun (Zo)'],
 ['Always be nice and say','nice things. Never say','mean things. (Zo)'],
 ['Always come up with new','ideas, inventions,','contraptions, and','machines (Zo)'],
@@ -129,11 +146,47 @@ function maze() {
   console.log(contents);
 }
 
+function dailyRules() { // max width: 28
+  console.log('╔══════════════════════════╗');
+  console.log('║       Daily Rules        ║');
+  console.log('╚══════════════════════════╝');
+  const dailyRule = "I will be nice, say please, and thank you.";
+  console.log(wordwrap(dailyRule, {width: 27, indent: ' '}));
+}
+
+async function weather() {
+  console.log('╔══════════════════════════╗');
+  console.log('║         Weather          ║');
+  console.log('╚══════════════════════════╝');
+  var url = "https://api.weather.gov/gridpoints/MTR/85,142/forecast";
+  const weather =  await downloadPage(url);
+  const weatherjson = JSON.parse(weather);
+  console.log(wordwrap(weatherjson.properties.periods[0].detailedForecast, {width: 26, indent: ' '}));
+}
+
+async function wordOfTheDay() {
+  console.log('╔══════════════════════════╗');
+  console.log('║     Word of The Day      ║');
+  console.log('╚══════════════════════════╝');
+  var url = "https://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+  const word =  await downloadPage(url);
+  const wordjson = JSON.parse(word);
+  console.log('Word:');
+  console.log(' ' + wordjson.word);
+  console.log('Definition:');
+  console.log(wordwrap(wordjson.definitions[0].text, {width: 26, indent: ' '}));
+  console.log('Example:');
+  console.log(wordwrap(wordjson.examples[0].text, {width: 26, indent: ' '}));
+}
+
 header();
 todayIs();
+dailyRules();
 ruleOfLife();
-numbersPlaces();
-mathPractice();
-maze();
-wordSearch();
-
+weather().then( moo => {
+  wordOfTheDay().then().catch(err => {});
+}).catch(err => {});
+//numbersPlaces();
+//mathPractice();
+//maze();
+//wordSearch();
